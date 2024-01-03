@@ -11,7 +11,39 @@
 		0C7186EB2B4178D6005E2383 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C7186EA2B4178D6005E2383 /* Assets.xcassets */; };
 		0C7186EE2B4178D6005E2383 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C7186EC2B4178D6005E2383 /* LaunchScreen.storyboard */; };
 		0CC176C12B44F79E00D54575 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC176C02B44F79E00D54575 /* HomeViewController.swift */; };
+		0CC176E42B44FA7400D54575 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC176E32B44FA7400D54575 /* WidgetKit.framework */; };
+		0CC176E62B44FA7400D54575 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC176E52B44FA7400D54575 /* SwiftUI.framework */; };
+		0CC176E92B44FA7400D54575 /* MKCWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC176E82B44FA7400D54575 /* MKCWidgetBundle.swift */; };
+		0CC176EB2B44FA7400D54575 /* MKCLiveWidgetActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC176EA2B44FA7400D54575 /* MKCLiveWidgetActivity.swift */; };
+		0CC176ED2B44FA7400D54575 /* MKCWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC176EC2B44FA7400D54575 /* MKCWidget.swift */; };
+		0CC176EF2B44FA7500D54575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CC176EE2B44FA7500D54575 /* Assets.xcassets */; };
+		0CC176F32B44FA7500D54575 /* MKCWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0CC176E12B44FA7400D54575 /* MKCWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0CC176F92B450E5A00D54575 /* MKCLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC176F82B450E5A00D54575 /* MKCLiveActivityManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0CC176F12B44FA7500D54575 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0C7186D62B4178D3005E2383 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0CC176E02B44FA7400D54575;
+			remoteInfo = MKCWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0CC176F42B44FA7500D54575 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0CC176F32B44FA7500D54575 /* MKCWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0C7186DE2B4178D3005E2383 /* TestActivityKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestActivityKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -20,6 +52,15 @@
 		0C7186ED2B4178D6005E2383 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C7186EF2B4178D6005E2383 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CC176C02B44F79E00D54575 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		0CC176E12B44FA7400D54575 /* MKCWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MKCWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CC176E32B44FA7400D54575 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		0CC176E52B44FA7400D54575 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		0CC176E82B44FA7400D54575 /* MKCWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCWidgetBundle.swift; sourceTree = "<group>"; };
+		0CC176EA2B44FA7400D54575 /* MKCLiveWidgetActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCLiveWidgetActivity.swift; sourceTree = "<group>"; };
+		0CC176EC2B44FA7400D54575 /* MKCWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCWidget.swift; sourceTree = "<group>"; };
+		0CC176EE2B44FA7500D54575 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0CC176F02B44FA7500D54575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0CC176F82B450E5A00D54575 /* MKCLiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCLiveActivityManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +71,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0CC176DE2B44FA7400D54575 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CC176E62B44FA7400D54575 /* SwiftUI.framework in Frameworks */,
+				0CC176E42B44FA7400D54575 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -37,6 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				0C7186E02B4178D3005E2383 /* TestActivityKit */,
+				0CC176E72B44FA7400D54575 /* MKCWidget */,
+				0CC176E22B44FA7400D54575 /* Frameworks */,
 				0C7186DF2B4178D3005E2383 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				0C7186DE2B4178D3005E2383 /* TestActivityKit.app */,
+				0CC176E12B44FA7400D54575 /* MKCWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,11 +107,33 @@
 			children = (
 				0C7186E12B4178D3005E2383 /* AppDelegate.swift */,
 				0CC176C02B44F79E00D54575 /* HomeViewController.swift */,
+				0CC176F82B450E5A00D54575 /* MKCLiveActivityManager.swift */,
 				0C7186EA2B4178D6005E2383 /* Assets.xcassets */,
 				0C7186EC2B4178D6005E2383 /* LaunchScreen.storyboard */,
 				0C7186EF2B4178D6005E2383 /* Info.plist */,
 			);
 			path = TestActivityKit;
+			sourceTree = "<group>";
+		};
+		0CC176E22B44FA7400D54575 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CC176E32B44FA7400D54575 /* WidgetKit.framework */,
+				0CC176E52B44FA7400D54575 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0CC176E72B44FA7400D54575 /* MKCWidget */ = {
+			isa = PBXGroup;
+			children = (
+				0CC176E82B44FA7400D54575 /* MKCWidgetBundle.swift */,
+				0CC176EA2B44FA7400D54575 /* MKCLiveWidgetActivity.swift */,
+				0CC176EC2B44FA7400D54575 /* MKCWidget.swift */,
+				0CC176EE2B44FA7500D54575 /* Assets.xcassets */,
+				0CC176F02B44FA7500D54575 /* Info.plist */,
+			);
+			path = MKCWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,15 +146,34 @@
 				0C7186DA2B4178D3005E2383 /* Sources */,
 				0C7186DB2B4178D3005E2383 /* Frameworks */,
 				0C7186DC2B4178D3005E2383 /* Resources */,
+				0CC176F42B44FA7500D54575 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0CC176F22B44FA7500D54575 /* PBXTargetDependency */,
 			);
 			name = TestActivityKit;
 			productName = TestActivityKit;
 			productReference = 0C7186DE2B4178D3005E2383 /* TestActivityKit.app */;
 			productType = "com.apple.product-type.application";
+		};
+		0CC176E02B44FA7400D54575 /* MKCWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0CC176F72B44FA7500D54575 /* Build configuration list for PBXNativeTarget "MKCWidgetExtension" */;
+			buildPhases = (
+				0CC176DD2B44FA7400D54575 /* Sources */,
+				0CC176DE2B44FA7400D54575 /* Frameworks */,
+				0CC176DF2B44FA7400D54575 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MKCWidgetExtension;
+			productName = MKCWidgetExtension;
+			productReference = 0CC176E12B44FA7400D54575 /* MKCWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -88,11 +182,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					0C7186DD2B4178D3005E2383 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					0CC176E02B44FA7400D54575 = {
+						CreatedOnToolsVersion = 15.1;
 					};
 				};
 			};
@@ -110,6 +207,7 @@
 			projectRoot = "";
 			targets = (
 				0C7186DD2B4178D3005E2383 /* TestActivityKit */,
+				0CC176E02B44FA7400D54575 /* MKCWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -124,6 +222,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0CC176DF2B44FA7400D54575 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CC176EF2B44FA7500D54575 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -131,12 +237,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CC176F92B450E5A00D54575 /* MKCLiveActivityManager.swift in Sources */,
 				0C7186E22B4178D3005E2383 /* AppDelegate.swift in Sources */,
 				0CC176C12B44F79E00D54575 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0CC176DD2B44FA7400D54575 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CC176ED2B44FA7400D54575 /* MKCWidget.swift in Sources */,
+				0CC176EB2B44FA7400D54575 /* MKCLiveWidgetActivity.swift in Sources */,
+				0CC176E92B44FA7400D54575 /* MKCWidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0CC176F22B44FA7500D54575 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0CC176E02B44FA7400D54575 /* MKCWidgetExtension */;
+			targetProxy = 0CC176F12B44FA7500D54575 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0C7186EC2B4178D6005E2383 /* LaunchScreen.storyboard */ = {
@@ -267,6 +392,7 @@
 		0C7186F32B4178D6005E2383 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,6 +422,7 @@
 		0C7186F42B4178D6005E2383 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -322,6 +449,69 @@
 			};
 			name = Release;
 		};
+		0CC176F52B44FA7500D54575 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MKCWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MKCWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.TestActivityKit.MKCWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0CC176F62B44FA7500D54575 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MKCWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MKCWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.TestActivityKit.MKCWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -339,6 +529,15 @@
 			buildConfigurations = (
 				0C7186F32B4178D6005E2383 /* Debug */,
 				0C7186F42B4178D6005E2383 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0CC176F72B44FA7500D54575 /* Build configuration list for PBXNativeTarget "MKCWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CC176F52B44FA7500D54575 /* Debug */,
+				0CC176F62B44FA7500D54575 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
