@@ -10,9 +10,31 @@ import WidgetKit
 import SwiftUI
 
 public enum MKCLiveActivityState: Int, Codable, Hashable, CaseIterable {
-    case livePreview // 直播预告(未开始)
-    case living // 直播中
-    case liveReview // 直播回顾
+    case notStart // 直播预告(未开始)
+    case playing // 直播中
+    case end // 直播回顾
+    
+    func imageIcon() -> String {
+        switch self {
+        case .notStart:
+            return "live_no_start_hightlight"
+        case .playing:
+            return "live_living"
+        case .end:
+            return "live_end"
+        }
+    }
+    
+    func desc() -> String {
+        switch self {
+        case .notStart:
+            return "直播预告"
+        case .playing:
+            return "直播中"
+        case .end:
+            return "直播回顾"
+        }
+    }
 }
 
 struct MKCWidgetAttributes: ActivityAttributes {
@@ -25,9 +47,57 @@ struct MKCWidgetAttributes: ActivityAttributes {
     var title: String // 12月月度沟通会
     var startTime: Date
     //预计2023/11/29 19:39 分开始
+    
+    func subTitleString(state: MKCLiveActivityState) -> AttributedString {
+        switch state {
+        case .notStart:
+            let df = DateFormatter()
+            df.setLocalizedDateFormatFromTemplate("yyyy/MM/dd")
+            let yearStr = df.string(from: startTime)
+            var str1 = AttributedString("预计\(yearStr) ")
+            str1.font = .systemFont(ofSize: 14)
+            str1.foregroundColor = .headerSubtitle
+            
+            df.setLocalizedDateFormatFromTemplate("HH:mm")
+            let timeStr = df.string(from: startTime)
+            var str2 = AttributedString("\(timeStr)")
+            str2.font = .systemFont(ofSize: 14)
+            str2.foregroundColor = .headerHightlightTitle
+            
+            var str3 = AttributedString("分开始")
+            str3.font = .systemFont(ofSize: 14)
+            str3.foregroundColor = .headerSubtitle
+            
+            return str1+str2+str3
+        case .playing:
+            var str1 = AttributedString("\(audience)")
+            str1.font = .systemFont(ofSize: 14)
+            str1.foregroundColor = .headerHightlightTitle
+            
+            var str2 = AttributedString("人观看  ")
+            str2.font = .systemFont(ofSize: 14)
+            str2.foregroundColor = .headerSubtitle
+            
+            var str3 = AttributedString("\(barrage)")
+            str3.font = .systemFont(ofSize: 14)
+            str3.foregroundColor = .headerHightlightTitle
+            
+            var str4 = AttributedString("条弹幕")
+            str4.font = .systemFont(ofSize: 14)
+            str4.foregroundColor = .headerSubtitle
+            
+            return str1+str2+str3+str4
+        case .end:
+            var str1 = AttributedString("直播已结束，可点击查看直播回顾～")
+            str1.font = .systemFont(ofSize: 14)
+            str1.foregroundColor = .headerSubtitle
+            return str1
+        }
+    }
 }
 
 struct MKCLiveWidgetActivity: Widget {
+    
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: MKCWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
@@ -87,22 +157,28 @@ struct MKCLiveWidgetActivity: Widget {
                             .resizable()
                             .frame(width: 68.5,height: 10).padding(.trailing, 10)
                     }.padding(.bottom, 4)
-                    Text("预计")
-                        .font(.system(size: 14))
-                        .foregroundStyle(.headerSubtitle)
-                    + Text(context.attributes.startTime, style:.date)
-                        .font(.system(size: 14))
-                        .foregroundStyle(.headerSubtitle)
-                    + Text(context.attributes.startTime, style:.time)
-                        .foregroundStyle(.headerHightlightTitle)
-                        .font(.system(size: 14))
-                    + Text("分开始")
-                        .font(.system(size: 14))
-                        .foregroundStyle(.headerSubtitle)
+                    
+                    Text(context.attributes.subTitleString(state: context.state.state))
                 }).padding(.leading, 10)
             }
-            //.background(LinearGradient(gradient: Gradient(colors: [Color.accentColor, Color.blue]), startPoint: .top, endPoint: .bottom))
-            //.frame(height:60)
+            .background(LinearGradient(gradient: Gradient(colors: [Color.accentColor, Color.blue]), startPoint: .top, endPoint: .bottom))
+            .frame(height:60)
+    }
+    
+    @ViewBuilder
+    func createProcessView() -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 4)
+                .frame(height:8)
+                .background(.progressBar)
+            HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: nil, content: {
+                ForEach(0..<8) { index in
+                    Circle()
+                        .frame(width:6 ,height: 6)
+                        .foregroundStyle(.progressDot)
+                }
+            })
+        }
     }
     
     @ViewBuilder
@@ -118,16 +194,51 @@ struct MKCLiveWidgetActivity: Widget {
                         .background(in: Capsule())
                         .padding([.leading,.trailing],22)
                     HStack(alignment: .center, spacing: nil) {
-                        ForEach(MKCLiveActivityState.allCases, id: \.self) { state in
+                        VStack {
+                            let state: MKCLiveActivityState = .notStart
                             Circle().foregroundColor(.pink).overlay {
-                                Image(systemName: "person.and.background.dotted")
+                                Image(state.imageIcon())
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .foregroundColor(.white)
                                     .padding(5)
                                     .bold()
                             }.frame(width: 44, height: 44)
+                            Text(state.desc())
                         }
+                        .frame(width: 60)
+                        
+                        createProcessView()
+                        
+                        VStack {
+                            let state: MKCLiveActivityState = .playing
+                            Circle().foregroundColor(.pink).overlay {
+                                Image(state.imageIcon())
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .bold()
+                            }.frame(width: 44, height: 44)
+                            Text(state.desc())
+                        }
+                        .frame(width: 60)
+                        
+                        createProcessView()
+                        
+                        VStack {
+                            let state: MKCLiveActivityState = .end
+                            Circle().foregroundColor(.pink).overlay {
+                                Image(state.imageIcon())
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .bold()
+                            }.frame(width: 44, height: 44)
+                            Text(state.desc())
+                        }
+                        .frame(width: 60)
                     }
                 }
             }.padding(.top,8)
@@ -148,7 +259,7 @@ extension MKCWidgetAttributes {
 #Preview("Notification", as: .content, using: MKCWidgetAttributes.preview) {
    MKCLiveWidgetActivity()
 } contentStates: {
-    MKCWidgetAttributes.ContentState(state: MKCLiveActivityState.livePreview)
+    MKCWidgetAttributes.ContentState(state: MKCLiveActivityState.notStart)
 //    MKCWidgetAttributes.ContentState.smiley
 //    MKCWidgetAttributes.ContentState.starEyes
 }
