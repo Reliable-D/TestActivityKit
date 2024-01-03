@@ -56,41 +56,41 @@ struct MKCWidgetAttributes: ActivityAttributes {
             let yearStr = df.string(from: startTime)
             var str1 = AttributedString("预计\(yearStr) ")
             str1.font = .systemFont(ofSize: 14)
-            str1.foregroundColor = .headerSubtitle
+            str1.foregroundColor = Color("headerSubtitle")
             
             df.setLocalizedDateFormatFromTemplate("HH:mm")
             let timeStr = df.string(from: startTime)
             var str2 = AttributedString("\(timeStr)")
             str2.font = .systemFont(ofSize: 14)
-            str2.foregroundColor = .headerHightlightTitle
+            str2.foregroundColor = Color("headerHightlightTitle")
             
             var str3 = AttributedString("分开始")
             str3.font = .systemFont(ofSize: 14)
-            str3.foregroundColor = .headerSubtitle
+            str3.foregroundColor = Color("headerSubtitle")
             
             return str1+str2+str3
         case .playing:
             var str1 = AttributedString("\(audience)")
             str1.font = .systemFont(ofSize: 14)
-            str1.foregroundColor = .headerHightlightTitle
+            str1.foregroundColor = Color("headerHightlightTitle")
             
             var str2 = AttributedString("人观看  ")
             str2.font = .systemFont(ofSize: 14)
-            str2.foregroundColor = .headerSubtitle
+            str2.foregroundColor = Color("headerSubtitle")
             
             var str3 = AttributedString("\(barrage)")
             str3.font = .systemFont(ofSize: 14)
-            str3.foregroundColor = .headerHightlightTitle
+            str3.foregroundColor = Color("headerHightlightTitle")
             
             var str4 = AttributedString("条弹幕")
             str4.font = .systemFont(ofSize: 14)
-            str4.foregroundColor = .headerSubtitle
+            str4.foregroundColor = Color("headerSubtitle")
             
             return str1+str2+str3+str4
         case .end:
             var str1 = AttributedString("直播已结束，可点击查看直播回顾～")
             str1.font = .systemFont(ofSize: 14)
-            str1.foregroundColor = .headerSubtitle
+            str1.foregroundColor = Color("headerSubtitle")
             return str1
         }
     }
@@ -149,7 +149,7 @@ struct MKCLiveWidgetActivity: Widget {
                 VStack(alignment: .leading, content: {
                     HStack {
                         Text(context.attributes.title)
-                            .foregroundStyle(.headerTitle)
+                            .foregroundStyle(Color("headerTitle"))
                             .font(.system(size: 16))
                             .fontWeight(.bold)
                         Spacer()
@@ -170,12 +170,12 @@ struct MKCLiveWidgetActivity: Widget {
         ZStack {
             RoundedRectangle(cornerRadius: 4)
                 .frame(height:8)
-                .background(.progressBar)
+                .background(Color("progressBar"))
             HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: nil, content: {
                 ForEach(0..<8) { index in
                     Circle()
                         .frame(width:6 ,height: 6)
-                        .foregroundStyle(.progressDot)
+                        .foregroundStyle(Color("progressDot"))
                 }
             })
         }
@@ -256,6 +256,27 @@ extension MKCWidgetAttributes {
     }
 }
 
+struct MKCLiveWidgetActivity_Previews: PreviewProvider {
+    static let attributes = MKCWidgetAttributes(audience: 1000, barrage: 2000, title: "12月月度沟通会", startTime: Date(timeIntervalSinceNow: 10 * 60 * 60))
+    static let contentState = MKCWidgetAttributes.ContentState(state: .notStart)
+
+    static var previews: some View {
+        attributes
+            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
+            .previewDisplayName("Island Compact")
+        attributes
+            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
+            .previewDisplayName("Island Expanded")
+        attributes
+            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
+            .previewDisplayName("Minimal")
+        attributes
+            .previewContext(contentState, viewKind: .content)
+            .previewDisplayName("Notification")
+    }
+}
+
+/*
 #Preview("Notification", as: .content, using: MKCWidgetAttributes.preview) {
    MKCLiveWidgetActivity()
 } contentStates: {
@@ -263,3 +284,4 @@ extension MKCWidgetAttributes {
 //    MKCWidgetAttributes.ContentState.smiley
 //    MKCWidgetAttributes.ContentState.starEyes
 }
+*/
