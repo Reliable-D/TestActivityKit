@@ -38,18 +38,24 @@ public enum MKCLiveActivityState: Int, Codable, Hashable, CaseIterable {
 }
 
 struct MKCWidgetAttributes: ActivityAttributes {
+    
+    /// ContentState存储动态数据
     public struct ContentState: Codable, Hashable {
         public var state: MKCLiveActivityState
+        var audience: Int // 观众
+        var barrage: Int // 弹幕
     }
 
-    var audience: Int // 观众
-    var barrage: Int // 弹幕
+    /* ActivityAttributes存储静态数据 */
     var title: String // 12月月度沟通会
-    var startTime: Date
-    //预计2023/11/29 19:39 分开始
+    var startTime: Date // 预计2023/11/29 19:39 分开始
     
-    func subTitleString(state: MKCLiveActivityState) -> AttributedString {
-        switch state {
+    
+    /// 获取副标题文字
+    /// - Parameter state: 状态
+    /// - Returns: 文字
+    func subTitleString(state: MKCWidgetAttributes.ContentState) -> AttributedString {
+        switch state.state {
         case .notStart:
             let df = DateFormatter()
             df.setLocalizedDateFormatFromTemplate("yyyy/MM/dd")
@@ -70,7 +76,7 @@ struct MKCWidgetAttributes: ActivityAttributes {
             
             return str1+str2+str3
         case .playing:
-            var str1 = AttributedString("\(audience)")
+            var str1 = AttributedString("\(state.audience)")
             str1.font = .systemFont(ofSize: 14)
             str1.foregroundColor = Color("headerHightlightTitle")
             
@@ -78,7 +84,7 @@ struct MKCWidgetAttributes: ActivityAttributes {
             str2.font = .systemFont(ofSize: 14)
             str2.foregroundColor = Color("headerSubtitle")
             
-            var str3 = AttributedString("\(barrage)")
+            var str3 = AttributedString("\(state.barrage)")
             str3.font = .systemFont(ofSize: 14)
             str3.foregroundColor = Color("headerHightlightTitle")
             
@@ -118,14 +124,18 @@ struct MKCLiveWidgetActivity: Widget {
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     Text("Bottom")
-                    // more content
+                    Text("i am huihui.zhang")
                 }
             } compactLeading: {
-                Text("L")
+                Image("ecollege_live_icon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
             } compactTrailing: {
-                Text("compactTrailing")
+                Text(context.state.state.desc()).foregroundStyle(Color("islandTitle"))
             } minimal: {
-                Text("mini")
+                Image("ecollege_live_icon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -137,6 +147,7 @@ struct MKCLiveWidgetActivity: Widget {
             HStack { // header
                 Image("ecollege_live_icon")
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 48, height: 48)
                     .padding(.leading, 15)
                     .padding(.top, 15)
@@ -155,7 +166,7 @@ struct MKCLiveWidgetActivity: Widget {
                     }
                     .padding(.bottom, 4)
                     
-                    Text(context.attributes.subTitleString(state: context.state.state))
+                    Text(context.attributes.subTitleString(state: context.state))
                 })
                 .padding(.leading, 10)
             }
@@ -219,13 +230,13 @@ struct MKCLiveWidgetActivity: Widget {
 
 extension MKCWidgetAttributes {
     fileprivate static var preview: MKCWidgetAttributes {
-        MKCWidgetAttributes(audience: 100, barrage: 2000, title: "12月月度沟通会", startTime: Date(timeIntervalSinceNow: 6 * 60 * 60))
+        MKCWidgetAttributes(title: "12月月度沟通会", startTime: Date(timeIntervalSinceNow: 6 * 60 * 60))
     }
 }
 
 struct MKCLiveWidgetActivity_Previews: PreviewProvider {
-    static let attributes = MKCWidgetAttributes(audience: 1000, barrage: 2000, title: "12月月度沟通会", startTime: Date(timeIntervalSinceNow: 10 * 60 * 60))
-    static let contentState = MKCWidgetAttributes.ContentState(state: .notStart)
+    static let attributes = MKCWidgetAttributes(title: "12月月度沟通会", startTime: Date(timeIntervalSinceNow: 10 * 60 * 60))
+    static let contentState = MKCWidgetAttributes.ContentState(state: .notStart, audience: 1000, barrage: 500)
 
     static var previews: some View {
         attributes
