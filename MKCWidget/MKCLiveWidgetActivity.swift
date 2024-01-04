@@ -161,7 +161,7 @@ struct MKCLiveWidgetActivity: Widget {
                     Text(context.attributes.subTitleString(state: context.state.state))
                 }).padding(.leading, 10)
             }
-            .background(LinearGradient(gradient: Gradient(colors: [Color.accentColor, Color.blue]), startPoint: .top, endPoint: .bottom))
+            .background(LinearGradient(gradient: Gradient(colors: [Color.accent, Color.white]), startPoint: .top, endPoint: .bottom))
             .frame(height:60)
     }
     
@@ -172,12 +172,29 @@ struct MKCLiveWidgetActivity: Widget {
                 .frame(height:8)
                 .background(Color("progressBar"))
             HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: nil, content: {
-                ForEach(0..<8) { index in
+                ForEach(0..<5) { index in
                     Circle()
                         .frame(width:6 ,height: 6)
                         .foregroundStyle(Color("progressDot"))
+                        .padding(.leading,6)
                 }
             })
+        }
+    }
+    
+    func createStateItem(_ state: MKCLiveActivityState) -> some View {
+        VStack {
+//            let state: MKCLiveActivityState = .end
+            Circle().foregroundColor(.pink).overlay {
+                Image(state.imageIcon())
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(.white)
+//                                    .padding(5)
+                    .bold()
+            }.frame(width: 32, height: 32)
+            Text(state.desc())
+                .font(.system(size: 14))
         }
     }
     
@@ -188,60 +205,15 @@ struct MKCLiveWidgetActivity: Widget {
             lockHeaderView(context).frame(height: 60)
             HStack {
                 ZStack {
-                    Divider()
-                        .frame(height:2)
-                        .background(.black.opacity(0.5))
-                        .background(in: Capsule())
-                        .padding([.leading,.trailing],22)
-                    HStack(alignment: .center, spacing: nil) {
-                        VStack {
-                            let state: MKCLiveActivityState = .notStart
-                            Circle().foregroundColor(.pink).overlay {
-                                Image(state.imageIcon())
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                    .bold()
-                            }.frame(width: 44, height: 44)
-                            Text(state.desc())
-                        }
-                        .frame(width: 60)
-                        
+                    HStack(spacing: 0) {
+                        createStateItem(.notStart)
                         createProcessView()
-                        
-                        VStack {
-                            let state: MKCLiveActivityState = .playing
-                            Circle().foregroundColor(.pink).overlay {
-                                Image(state.imageIcon())
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                    .bold()
-                            }.frame(width: 44, height: 44)
-                            Text(state.desc())
-                        }
-                        .frame(width: 60)
-                        
+                        createStateItem(.playing)
                         createProcessView()
-                        
-                        VStack {
-                            let state: MKCLiveActivityState = .end
-                            Circle().foregroundColor(.pink).overlay {
-                                Image(state.imageIcon())
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(.white)
-                                    .padding(5)
-                                    .bold()
-                            }.frame(width: 44, height: 44)
-                            Text(state.desc())
-                        }
-                        .frame(width: 60)
-                    }
+                        createStateItem(.end)
+                    }.padding(8)
                 }
-            }.padding(.top,8)
+            }
             
         }
         .background(.white)
