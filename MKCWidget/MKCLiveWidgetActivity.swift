@@ -101,9 +101,6 @@ struct MKCLiveWidgetActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: MKCWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
-//            VStack {
-//                Text("Hello \(context.state.emoji)")
-//            }
 
             lockView(context)
                 //.activityBackgroundTint(Color.cyan)
@@ -138,13 +135,11 @@ struct MKCLiveWidgetActivity: Widget {
     @ViewBuilder
     func lockHeaderView(_ context: ActivityViewContext<MKCWidgetAttributes>) -> some View {
             HStack { // header
-                Circle().foregroundColor(.pink).overlay {
-                    Image("ecollege_live_icon")
-                        .resizable()
-                        .foregroundColor(.white)
-                        .padding(5)
-                        .bold()
-                }.frame(width: 48, height: 48).padding(.leading, 5)
+                Image("ecollege_live_icon")
+                    .resizable()
+                    .frame(width: 48, height: 48)
+                    .padding(.leading, 15)
+                    .padding(.top, 15)
 
                 VStack(alignment: .leading, content: {
                     HStack {
@@ -155,14 +150,16 @@ struct MKCLiveWidgetActivity: Widget {
                         Spacer()
                         Image("MK_logo")
                             .resizable()
-                            .frame(width: 68.5,height: 10).padding(.trailing, 10)
-                    }.padding(.bottom, 4)
+                            .frame(width: 68.5,height: 10)
+                            .padding(.trailing, 18)
+                    }
+                    .padding(.bottom, 4)
                     
                     Text(context.attributes.subTitleString(state: context.state.state))
-                }).padding(.leading, 10)
+                })
+                .padding(.leading, 10)
             }
             .background(LinearGradient(gradient: Gradient(colors: [Color.accent, Color.white]), startPoint: .top, endPoint: .bottom))
-            .frame(height:60)
     }
     
     @ViewBuilder
@@ -184,25 +181,22 @@ struct MKCLiveWidgetActivity: Widget {
     
     func createStateItem(_ state: MKCLiveActivityState) -> some View {
         VStack {
-//            let state: MKCLiveActivityState = .end
             Circle().foregroundColor(.pink).overlay {
                 Image(state.imageIcon())
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .foregroundColor(.white)
-//                                    .padding(5)
                     .bold()
             }.frame(width: 32, height: 32)
             Text(state.desc())
-                .font(.system(size: 14))
+                .font(.system(size: 12))
         }
     }
     
     @ViewBuilder
     func lockView(_ context: ActivityViewContext<MKCWidgetAttributes>) -> some View {
-        
         VStack {
-            lockHeaderView(context).frame(height: 60)
+            lockHeaderView(context)
             HStack {
                 ZStack {
                     HStack(spacing: 0) {
@@ -211,14 +205,15 @@ struct MKCLiveWidgetActivity: Widget {
                         createStateItem(.playing)
                         createProcessView()
                         createStateItem(.end)
-                    }.padding(8)
+                    }
+                    .padding(.leading,15)
+                    .padding(.trailing,15)
+                    .padding(.bottom,12)
                 }
             }
             
         }
         .background(.white)
-        .padding(10)
-        .frame(height: 140)
     }
 }
 
