@@ -19,6 +19,8 @@
 		0CC176EF2B44FA7500D54575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CC176EE2B44FA7500D54575 /* Assets.xcassets */; };
 		0CC176F32B44FA7500D54575 /* MKCWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0CC176E12B44FA7400D54575 /* MKCWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0CC176F92B450E5A00D54575 /* MKCLiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC176F82B450E5A00D54575 /* MKCLiveActivityManager.swift */; };
+		0CF8709C2B49564900FB0862 /* MKCWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF8709B2B49564900FB0862 /* MKCWidgetAttributes.swift */; };
+		0CF8709D2B49564900FB0862 /* MKCWidgetAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF8709B2B49564900FB0862 /* MKCWidgetAttributes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,7 @@
 		0CC176EE2B44FA7500D54575 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CC176F02B44FA7500D54575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CC176F82B450E5A00D54575 /* MKCLiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCLiveActivityManager.swift; sourceTree = "<group>"; };
+		0CF8709B2B49564900FB0862 /* MKCWidgetAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCWidgetAttributes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,7 @@
 				0C7186E12B4178D3005E2383 /* AppDelegate.swift */,
 				0CC176C02B44F79E00D54575 /* HomeViewController.swift */,
 				0CC176F82B450E5A00D54575 /* MKCLiveActivityManager.swift */,
+				0CF8709B2B49564900FB0862 /* MKCWidgetAttributes.swift */,
 				0C7186EA2B4178D6005E2383 /* Assets.xcassets */,
 				0C7186EC2B4178D6005E2383 /* LaunchScreen.storyboard */,
 				0C7186EF2B4178D6005E2383 /* Info.plist */,
@@ -239,6 +243,7 @@
 			files = (
 				0CC176F92B450E5A00D54575 /* MKCLiveActivityManager.swift in Sources */,
 				0C7186E22B4178D3005E2383 /* AppDelegate.swift in Sources */,
+				0CF8709C2B49564900FB0862 /* MKCWidgetAttributes.swift in Sources */,
 				0CC176C12B44F79E00D54575 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +254,7 @@
 			files = (
 				0CC176ED2B44FA7400D54575 /* MKCWidget.swift in Sources */,
 				0CC176EB2B44FA7400D54575 /* MKCLiveWidgetActivity.swift in Sources */,
+				0CF8709D2B49564900FB0862 /* MKCWidgetAttributes.swift in Sources */,
 				0CC176E92B44FA7400D54575 /* MKCWidgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,6 +406,8 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestActivityKit/Info.plist;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -432,6 +440,8 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestActivityKit/Info.plist;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
