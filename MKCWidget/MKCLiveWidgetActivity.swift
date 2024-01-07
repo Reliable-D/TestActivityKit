@@ -39,6 +39,7 @@ struct MKCLiveWidgetActivity: Widget {
                     .aspectRatio(contentMode: .fit)
             } compactTrailing: {
                 Text(context.state.state.desc()).foregroundStyle(Color("islandTitle"))
+                    .font(.system(size: 13,weight: .medium))
             } minimal: {
                 Image("ecollege_live_icon")
                     .resizable()
@@ -57,26 +58,27 @@ struct MKCLiveWidgetActivity: Widget {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 48, height: 48)
                     .padding(.leading, 15)
-                    .padding(.top, 15)
+                    //.padding(.top, 15)
 
                 VStack(alignment: .leading, content: {
                     HStack {
                         Text(context.attributes.title)
                             .foregroundStyle(Color("headerTitle"))
                             .font(.system(size: 16))
-                            .fontWeight(.bold)
+                            .fontWeight(.medium)
                         Spacer()
                         Image("MK_logo")
                             .resizable()
                             .frame(width: 68.5,height: 10)
                             .padding(.trailing, 18)
                     }
-                    .padding(.bottom, 4)
+                    //.padding(.bottom, 4)
                     
                     Text(context.attributes.subTitleString(state: context.state))
                 })
                 .padding(.leading, 10)
             }
+            .padding(.top,16)
             .background(LinearGradient(gradient: Gradient(colors: [Color("ThemeColor"), Color.white]), startPoint: .top, endPoint: .bottom))
     }
     
@@ -95,35 +97,35 @@ struct MKCLiveWidgetActivity: Widget {
                 }
             })
         }
+        .frame(width: 100)
+        .offset(y:-8)
     }
     
-    func createStateItem(_ state: MKCLiveActivityState) -> some View {
+    func createStateItem(_ state: MKCLiveActivityState, current: MKCLiveActivityState) -> some View {
         VStack {
-            Circle().foregroundColor(.pink).overlay {
-                Image(state.imageIcon())
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.white)
-                    .bold()
-            }.frame(width: 32, height: 32)
+            Image(state.imageIcon(current))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 32, height: 32)
             Text(state.desc())
                 .font(.system(size: 12))
+                .foregroundColor((state == current) ? Color("islandTitle") : Color("StateText"))
+                .opacity(state.hidenDesc(current) ? 0.0 : 1.0)
         }
     }
     
     @ViewBuilder
     func lockView(_ context: ActivityViewContext<MKCWidgetAttributes>) -> some View {
-        //Text("123")
         VStack {
             lockHeaderView(context)
             HStack {
                 ZStack {
                     HStack(spacing: 0) {
-                        createStateItem(.notStart)
+                        createStateItem(.notStart, current: context.state.state)
                         createProcessView()
-                        createStateItem(.playing)
+                        createStateItem(.playing, current: context.state.state)
                         createProcessView()
-                        createStateItem(.end)
+                        createStateItem(.end, current: context.state.state)
                     }
                     .padding(.leading,15)
                     .padding(.trailing,15)
@@ -144,7 +146,7 @@ extension MKCWidgetAttributes {
 
 struct MKCLiveWidgetActivity_Previews: PreviewProvider {
     static let attributes = MKCWidgetAttributes(title: "12月月度沟通会", startTime: Date(timeIntervalSinceNow: 10 * 60 * 60))
-    static let contentState = MKCWidgetAttributes.ContentState(state: .notStart, audience: 1000, barrage: 500)
+    static let contentState = MKCWidgetAttributes.ContentState(state: .playing, audience: 1000, barrage: 500)
 
     static var previews: some View {
         attributes

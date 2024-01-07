@@ -14,14 +14,15 @@ public enum MKCLiveActivityState: Int, Codable, Hashable, CaseIterable {
     case playing // 直播中
     case end // 直播回顾
     
-    func imageIcon() -> String {
+    func imageIcon(_ currentState: MKCLiveActivityState) -> String {
+        let isSelect = currentState == self
         switch self {
         case .notStart:
-            return "live_no_start_hightlight"
+            return isSelect ? "live_no_start_hightlight" : "live_no_start_hightlight"
         case .playing:
-            return "live_living"
+            return isSelect ? "live_living" : "live_living"
         case .end:
-            return "live_end"
+            return isSelect ? "live_end" : "live_end"
         }
     }
     
@@ -33,6 +34,25 @@ public enum MKCLiveActivityState: Int, Codable, Hashable, CaseIterable {
             return "直播中"
         case .end:
             return "直播回顾"
+        }
+    }
+    
+    func hidenDesc(_ currentState: MKCLiveActivityState) -> Bool {
+        switch currentState {
+        case .notStart:
+            return false
+        case .playing:
+            if self == .notStart {
+                return true
+            } else {
+                return false
+            }
+        case .end:
+            if self == .end {
+                return false
+            } else {
+                return true
+            }
         }
     }
 }
