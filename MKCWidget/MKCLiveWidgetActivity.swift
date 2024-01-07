@@ -77,7 +77,7 @@ struct MKCLiveWidgetActivity: Widget {
                 })
                 .padding(.leading, 10)
             }
-            .background(LinearGradient(gradient: Gradient(colors: [Color.accent, Color.white]), startPoint: .top, endPoint: .bottom))
+            .background(LinearGradient(gradient: Gradient(colors: [Color("ThemeColor"), Color.white]), startPoint: .top, endPoint: .bottom))
     }
     
     @ViewBuilder
@@ -113,6 +113,7 @@ struct MKCLiveWidgetActivity: Widget {
     
     @ViewBuilder
     func lockView(_ context: ActivityViewContext<MKCWidgetAttributes>) -> some View {
+        //Text("123")
         VStack {
             lockHeaderView(context)
             HStack {
