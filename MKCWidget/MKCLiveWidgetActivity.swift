@@ -49,8 +49,6 @@ struct MKCLiveWidgetActivity: Widget {
                     .scaledToFit()
                     .frame(width: 48, height: 48)
                     .padding(.leading, 15)
-                    //.padding(.top, 15)
-
                 VStack(alignment: .leading, content: {
                     HStack {
                         Text(context.attributes.title)
@@ -64,13 +62,11 @@ struct MKCLiveWidgetActivity: Widget {
                             .frame(width: 68.5,height: 10)
                             .padding(.trailing, 18)
                     }
-                    //.padding(.bottom, 4)
-                    
                     Text(context.attributes.subTitleString(state: context.state, island: island))
                 })
                 .padding(.leading, 10)
             }
-            .padding(.top,16)
+            .padding(.top, island ? 0:16)
             .if(!island) { view in
                 view.background(LinearGradient(gradient: Gradient(colors: [Color("ThemeColor"), Color.white]), startPoint: .top, endPoint: .bottom))
             }
@@ -121,7 +117,7 @@ struct MKCLiveWidgetActivity: Widget {
                         createProcessView()
                         createStateItem(.end, current: context.state.state, island: island)
                     }
-                    .padding(.bottom,12)
+                    .padding(.bottom,island ? 0 : 12)
                 }
             }
             
