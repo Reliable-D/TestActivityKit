@@ -21,14 +21,6 @@ struct MKCLiveWidgetActivity: Widget {
 
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
-//                DynamicIslandExpandedRegion(.leading) {
-//                    Text("Leading")
-//                }
-//                DynamicIslandExpandedRegion(.trailing) {
-//                    Text("Trailing")
-//                }
                 DynamicIslandExpandedRegion(.bottom) {
                     lockView(context, island: true)
                 }
@@ -129,8 +121,6 @@ struct MKCLiveWidgetActivity: Widget {
                         createProcessView()
                         createStateItem(.end, current: context.state.state, island: island)
                     }
-                    .padding(.leading,15)
-                    .padding(.trailing,15)
                     .padding(.bottom,12)
                 }
             }
