@@ -74,7 +74,7 @@ public struct MKCWidgetAttributes: ActivityAttributes {
     /// 获取副标题文字
     /// - Parameter state: 状态
     /// - Returns: 文字
-    func subTitleString(state: MKCWidgetAttributes.ContentState) -> AttributedString {
+    func subTitleString(state: MKCWidgetAttributes.ContentState, island: Bool) -> AttributedString {
         switch state.state {
         case .notStart:
             let df = DateFormatter()
@@ -82,7 +82,7 @@ public struct MKCWidgetAttributes: ActivityAttributes {
             let yearStr = df.string(from: startTime)
             var str1 = AttributedString("预计\(yearStr) ")
             str1.font = .systemFont(ofSize: 14)
-            str1.foregroundColor = Color("headerSubtitle")
+            str1.foregroundColor = island ? Color.white : Color("headerSubtitle")
             
             df.setLocalizedDateFormatFromTemplate("HH:mm")
             let timeStr = df.string(from: startTime)
@@ -92,7 +92,7 @@ public struct MKCWidgetAttributes: ActivityAttributes {
             
             var str3 = AttributedString("分开始")
             str3.font = .systemFont(ofSize: 14)
-            str3.foregroundColor = Color("headerSubtitle")
+            str3.foregroundColor = island ? Color.white : Color("headerSubtitle")
             
             return str1+str2+str3
         case .playing:
@@ -102,7 +102,7 @@ public struct MKCWidgetAttributes: ActivityAttributes {
             
             var str2 = AttributedString("人观看  ")
             str2.font = .systemFont(ofSize: 14)
-            str2.foregroundColor = Color("headerSubtitle")
+            str2.foregroundColor = island ? Color.white : Color("headerSubtitle")
             
             var str3 = AttributedString("\(state.barrage)")
             str3.font = .systemFont(ofSize: 14)
@@ -110,13 +110,13 @@ public struct MKCWidgetAttributes: ActivityAttributes {
             
             var str4 = AttributedString("条弹幕")
             str4.font = .systemFont(ofSize: 14)
-            str4.foregroundColor = Color("headerSubtitle")
+            str4.foregroundColor = island ? Color.white : Color("headerSubtitle")
             
             return str1+str2+str3+str4
         case .end:
             var str1 = AttributedString("直播已结束，可点击查看直播回顾～")
             str1.font = .systemFont(ofSize: 14)
-            str1.foregroundColor = Color("headerSubtitle")
+            str1.foregroundColor = island ? Color.white : Color("headerSubtitle")
             return str1
         }
     }

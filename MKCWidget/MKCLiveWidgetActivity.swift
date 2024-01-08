@@ -15,7 +15,7 @@ struct MKCLiveWidgetActivity: Widget {
         ActivityConfiguration(for: MKCWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
 
-            lockView(context)
+            lockView(context, island: false)
                 //.activityBackgroundTint(Color.cyan)
                 //.activitySystemActionForegroundColor(Color.black)
 
@@ -23,15 +23,14 @@ struct MKCLiveWidgetActivity: Widget {
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
-                DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
-                }
-                DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
-                }
+//                DynamicIslandExpandedRegion(.leading) {
+//                    Text("Leading")
+//                }
+//                DynamicIslandExpandedRegion(.trailing) {
+//                    Text("Trailing")
+//                }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom")
-                    Text("i am huihui.zhang")
+                    lockView(context, island: true)
                 }
             } compactLeading: {
                 Image("ecollege_live_icon")
@@ -51,11 +50,11 @@ struct MKCLiveWidgetActivity: Widget {
     }
     
     @ViewBuilder
-    func lockHeaderView(_ context: ActivityViewContext<MKCWidgetAttributes>) -> some View {
+    func lockHeaderView(_ context: ActivityViewContext<MKCWidgetAttributes>, island: Bool) -> some View {
             HStack { // header
                 Image("ecollege_live_icon")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
                     .frame(width: 48, height: 48)
                     .padding(.leading, 15)
                     //.padding(.top, 15)
@@ -63,23 +62,26 @@ struct MKCLiveWidgetActivity: Widget {
                 VStack(alignment: .leading, content: {
                     HStack {
                         Text(context.attributes.title)
-                            .foregroundStyle(Color("headerTitle"))
+                            .foregroundStyle(island ? Color.white : Color("headerTitle"))
                             .font(.system(size: 16))
                             .fontWeight(.medium)
                         Spacer()
-                        Image("MK_logo")
+                        Image(island ? "MK_logo_white" : "MK_logo")
                             .resizable()
+                            .scaledToFit()
                             .frame(width: 68.5,height: 10)
                             .padding(.trailing, 18)
                     }
                     //.padding(.bottom, 4)
                     
-                    Text(context.attributes.subTitleString(state: context.state))
+                    Text(context.attributes.subTitleString(state: context.state, island: island))
                 })
                 .padding(.leading, 10)
             }
             .padding(.top,16)
-            .background(LinearGradient(gradient: Gradient(colors: [Color("ThemeColor"), Color.white]), startPoint: .top, endPoint: .bottom))
+            .if(!island) { view in
+                view.background(LinearGradient(gradient: Gradient(colors: [Color("ThemeColor"), Color.white]), startPoint: .top, endPoint: .bottom))
+            }
     }
     
     @ViewBuilder
@@ -115,9 +117,9 @@ struct MKCLiveWidgetActivity: Widget {
     }
     
     @ViewBuilder
-    func lockView(_ context: ActivityViewContext<MKCWidgetAttributes>) -> some View {
+    func lockView(_ context: ActivityViewContext<MKCWidgetAttributes>, island: Bool) -> some View {
         VStack {
-            lockHeaderView(context)
+            lockHeaderView(context, island: island)
             HStack {
                 ZStack {
                     HStack(spacing: 0) {
@@ -134,7 +136,9 @@ struct MKCLiveWidgetActivity: Widget {
             }
             
         }
-        .background(.white)
+        .if(!island) { view in
+            view.background(.white)
+        }
     }
 }
 
@@ -161,5 +165,20 @@ struct MKCLiveWidgetActivity_Previews: PreviewProvider {
         attributes
             .previewContext(contentState, viewKind: .content)
             .previewDisplayName("Notification")
+    }
+}
+
+extension View {
+    /// Applies the given transform if the given condition evaluates to `true`.
+    /// - Parameters:
+    ///   - condition: The condition to evaluate.
+    ///   - transform: The transform to apply to the source `View`.
+    /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
     }
 }
