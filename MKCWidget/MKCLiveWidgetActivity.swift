@@ -103,7 +103,7 @@ struct MKCLiveWidgetActivity: Widget {
         .offset(y:-8)
     }
     
-    func createStateItem(_ state: MKCLiveActivityState, current: MKCLiveActivityState) -> some View {
+    func createStateItem(_ state: MKCLiveActivityState, current: MKCLiveActivityState, island: Bool) -> some View {
         VStack {
             Image(state.imageIcon(current))
                 .resizable()
@@ -111,7 +111,7 @@ struct MKCLiveWidgetActivity: Widget {
                 .frame(width: 32, height: 32)
             Text(state.desc())
                 .font(.system(size: 12))
-                .foregroundColor((state == current) ? Color("islandTitle") : Color("StateText"))
+                .foregroundColor((state == current) ? Color("islandTitle") : (island ? Color.white : Color("StateText")))
                 .opacity(state.hidenDesc(current) ? 0.0 : 1.0)
         }
     }
@@ -123,11 +123,11 @@ struct MKCLiveWidgetActivity: Widget {
             HStack {
                 ZStack {
                     HStack(spacing: 0) {
-                        createStateItem(.notStart, current: context.state.state)
+                        createStateItem(.notStart, current: context.state.state, island: island)
                         createProcessView()
-                        createStateItem(.playing, current: context.state.state)
+                        createStateItem(.playing, current: context.state.state, island: island)
                         createProcessView()
-                        createStateItem(.end, current: context.state.state)
+                        createStateItem(.end, current: context.state.state, island: island)
                     }
                     .padding(.leading,15)
                     .padding(.trailing,15)
@@ -150,7 +150,7 @@ extension MKCWidgetAttributes {
 
 struct MKCLiveWidgetActivity_Previews: PreviewProvider {
     static let attributes = MKCWidgetAttributes(title: "12月月度沟通会", startTime: Date(timeIntervalSinceNow: 10 * 60 * 60))
-    static let contentState = MKCWidgetAttributes.ContentState(state: .playing, audience: 1000, barrage: 500)
+    static let contentState = MKCWidgetAttributes.ContentState(state: .notStart, audience: 1000, barrage: 500)
 
     static var previews: some View {
         attributes
